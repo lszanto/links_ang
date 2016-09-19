@@ -1,0 +1,11 @@
+    <h4>Login</h4>
+
+    <div *ngIf="!loggingIn" >
+        <label>Username: </label> <input #username ><br />
+        <label>Password: </label> <input #password type="password" ><br />
+        <button (click)="tryLogin(username.value, password.value)" >Login</button>
+    </div>
+
+    <div *ngIf="loggingIn" >
+        Attempting login...
+    </div>

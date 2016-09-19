@@ -1,0 +1,11 @@
+* { margin: 0; padding: 0; }
+
+body {
+    background-color: #eee;
+    margin: 5%;
+}
+
+hr {
+    border: #fff 1px solid;
+    margin: 20px 0;
+}

@@ -1,20 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-
-import 'rxjs/add/operator/toPromise';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private token: string = '';
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private router: Router) { }
 
-    login(username, password): Promise<object> {
-        return this.http.post('http://localhost:9000/api/login', JSON.stringify({ username: username, password: password }), { headers: this.headers })
-            .toPromise()
-            .then(response => response.json()['token'] as object)
-            .catch(this.handleError);
+    login(username, password) {
+        this.http.post('http://localhost:9000/api/login', JSON.stringify({ username: username, password: password }), { headers: this.headers })
+        .subscribe(
+            response => {
+                localStorage.setItem('jwt', response.json().token);
+                this.router.navigate([ '/main' ]);
+            },
+            error => {
+                this.handleError(error);
+            }
+        );
     }
 
     handleError(error: any): void {

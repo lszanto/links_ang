@@ -19,15 +19,6 @@ export class LoginComponent {
         this.loggingIn = true;
 
         // attempt login
-        if(this.userService.login(username, password)) {
-            // redirect
-            this.router.navigate([ '/main' ]);
-        } else {
-            // not logging in
-            this.loggingIn = false;
-
-            // show error
-            console.log('Nope');
-        }
+        this.userService.login(username, password);
     }
 }

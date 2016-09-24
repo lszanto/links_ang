@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 @Injectable()
 export class UserService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    private token: string = '';
 
     constructor(private http: Http, private router: Router) { }
 
@@ -14,6 +13,7 @@ export class UserService {
         .subscribe(
             response => {
                 localStorage.setItem('jwt', response.json().token);
+                localStorage.setItem('uid', response.json().user.ID);
                 this.router.navigate([ '/main' ]);
             },
             error => {

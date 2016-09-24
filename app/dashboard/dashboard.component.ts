@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Headers } from '@angular/http';
 import { Router } from '@angular/router';
 
-import { UserService } from '../services/user.service';
+import { Link } from '../classes/link';
+import { LinksService } from '../services/links.service';
 
 @Component({
     selector: 'dashboard-comp',
@@ -10,10 +11,14 @@ import { UserService } from '../services/user.service';
 })
 
 export class DashboardComponent implements OnInit {
-    constructor(private router: Router) {
+    links: Link[] = [];
+
+    constructor(private router: Router, private linksService: LinksService) {
         if(!localStorage.getItem('jwt')) this.router.navigate([ '/login' ]);
     }
 
     ngOnInit() {
+        this.linksService.getLinks()
+            .then(links => this.links = links);
     }
 }

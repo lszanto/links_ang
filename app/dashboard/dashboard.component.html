@@ -1,1 +1,5 @@
-<h1>Hello there silly</h1>
+<h4>Links</h4>
+<ul>
+    <li *ngFor="let link of links" ><a href="{{ link.url }}" target="_BLANK" >{{ link.title }}</a></li>
+</ul>
+<add-link></add-link>

@@ -12,7 +12,9 @@ import { UserService } from '../services/user.service';
 export class LoginComponent {
     loggingIn: boolean = false;
 
-    constructor(private userService: UserService, private router: Router) { }
+    constructor(private userService: UserService, private router: Router) {
+        if(localStorage.getItem('jwt')) this.router.navigate([ '/main' ]);
+    }
 
     tryLogin(username: string, password: string): void {
         // show logging screen
